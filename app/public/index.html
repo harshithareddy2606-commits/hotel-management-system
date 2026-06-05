@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Hotel Management System</h1>
+
+        <form id="bookingForm">
+
+            <input
+                type="text"
+                id="guest_name"
+                placeholder="Guest Name"
+                required
+            >
+
+            <input
+                type="number"
+                id="room_number"
+                placeholder="Room Number"
+                required
+            >
+
+            <input
+                type="date"
+                id="check_in"
+                required
+            >
+
+            <input
+                type="date"
+                id="check_out"
+                required
+            >
+
+            <button type="submit">
+                Book Room
+            </button>
+
+        </form>
+
+        <h2>Current Bookings</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Guest Name</th>
+                    <th>Room Number</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="bookingTable"></tbody>
+
+        </table>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
