@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hotel Management System</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f4f4;
+}
+
+header{
+background:#003366;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+nav{
+background:#00509e;
+padding:10px;
+text-align:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:15px;
+font-weight:bold;
+}
+
+.container{
+width:90%;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin-top:10px;
+}
+
+button{
+padding:10px 20px;
+background:green;
+color:white;
+border:none;
+margin-top:10px;
+cursor:pointer;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+table,th,td{
+border:1px solid #ccc;
+}
+
+th,td{
+padding:10px;
+text-align:center;
+}
+
+footer{
+background:#003366;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Hotel Management System</h1>
+<p>Online Room Reservation Portal</p>
+</header>
+
+<nav>
+<a href="#search">Search Rooms</a>
+<a href="#booking">Book Room</a>
+<a href="#cancel">Cancel Booking</a>
+<a href="#payment">Payment</a>
+</nav>
+
+<div class="container">
+
+<div class="card" id="search">
+
+<h2>Search Rooms</h2>
+
+<select id="roomType">
+<option>Standard Room</option>
+<option>Deluxe Room</option>
+<option>Suite Room</option>
+</select>
+
+<input type="date">
+
+<button onclick="searchRooms()">Search</button>
+
+<p id="searchResult"></p>
+
+</div>
+
+<div class="card" id="booking">
+
+<h2>Book Room</h2>
+
+<input type="text"
+id="guestName"
+placeholder="Guest Name">
+
+<input type="email"
+id="guestEmail"
+placeholder="Email">
+
+<select id="bookRoomType">
+<option>Standard Room</option>
+<option>Deluxe Room</option>
+<option>Suite Room</option>
+</select>
+
+<button onclick="bookRoom()">Book Room</button>
+
+</div>
+
+<div class="card">
+
+<h2>Current Bookings</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Room</th>
+</tr>
+</thead>
+
+<tbody id="bookingTable">
+</tbody>
+
+</table>
+
+</div>
+
+<div class="card" id="cancel">
+
+<h2>Cancel Booking</h2>
+
+<input type="number"
+id="cancelId"
+placeholder="Booking ID">
+
+<button onclick="cancelBooking()">Cancel Booking</button>
+
+</div>
+
+<div class="card" id="payment">
+
+<h2>Payment Module</h2>
+
+<input type="text"
+placeholder="Card Holder Name">
+
+<input type="text"
+placeholder="Card Number">
+
+<input type="text"
+placeholder="CVV">
+
+<input type="number"
+placeholder="Amount">
+
+<button onclick="makePayment()">Pay Now</button>
+
+<p id="paymentResult"></p>
+
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 Hotel Management System</p>
+</footer>
+
+<script>
+
+let bookings = [];
+let bookingId = 1;
+
+function searchRooms(){
+document.getElementById("searchResult")
+.innerHTML = "Rooms Available Successfully!";
+}
+
+function bookRoom(){
+
+const name =
+document.getElementById("guestName").value;
+
+const email =
+document.getElementById("guestEmail").value;
+
+const room =
+document.getElementById("bookRoomType").value;
+
+bookings.push({
+id:bookingId,
+name:name,
+email:email,
+room:room
+});
+
+displayBookings();
+
+bookingId++;
+}
+
+function displayBookings(){
+
+let rows="";
+
+bookings.forEach(b=>{
+
+rows += `
+<tr>
+<td>${b.id}</td>
+<td>${b.name}</td>
+<td>${b.email}</td>
+<td>${b.room}</td>
+</tr>
+`;
+
+});
+
+document.getElementById("bookingTable")
+.innerHTML = rows;
+}
+
+function cancelBooking(){
+
+const id =
+parseInt(document.getElementById("cancelId").value);
+
+bookings =
+bookings.filter(b=>b.id!==id);
+
+displayBookings();
+
+alert("Booking Cancelled");
+}
+
+function makePayment(){
+
+document.getElementById("paymentResult")
+.innerHTML =
+"Payment Successful (Demo Only)";
+}
+
+</script>
+
+</body>
+</html>
